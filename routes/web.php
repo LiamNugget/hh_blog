@@ -3,12 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/blog');
+Route::view('/', 'home')->name('home'); // resources/views/home.blade.php
 
 Route::prefix('blog')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('blog.home');
+    Route::view('/', 'welcome')->name('blog.home');
 
     require __DIR__ . '/auth.php';
 
@@ -22,4 +20,3 @@ Route::prefix('blog')->group(function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
-
